@@ -1,0 +1,8 @@
+#Turn CancelSprint off.
+disable-plugin: false
+
+#In ticks, the interval the plugin will check for sprinting.
+ticks-per-check: 60
+
+#Locale for CancelSprint messages.
+locale: "en"

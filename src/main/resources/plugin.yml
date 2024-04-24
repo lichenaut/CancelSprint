@@ -1,0 +1,11 @@
+name: CancelSprint
+version: '${version}'
+main: com.lichenaut.cancelsprint.Main
+api-version: '1.20'
+author: lichenaut
+description:
+  CancelSprint simply undoes sprinting movements.
+commands:
+  cancelsprint:
+    description: Base command for CancelSprint.
+    aliases: [cs]
