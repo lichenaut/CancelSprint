@@ -12,10 +12,8 @@ import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bstats.bukkit.MetricsLite;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginManager;
@@ -81,7 +79,7 @@ public final class Main extends JavaPlugin {
                     }
                 })
                 .exceptionallyAsync(e -> {
-                    logging.error("Error while deserializing muted player list!");
+                    logging.error("Error while deserializing message muter list!");
                     disablePlugin(e);
                     return null;
                 });
@@ -162,9 +160,7 @@ public final class Main extends JavaPlugin {
 
 
         mainFuture = mainFuture
-                .thenAcceptAsync(structured -> {
-                    pluginManager.registerEvents(new CSSprint(), this);
-                })
+                .thenAcceptAsync(structured -> pluginManager.registerEvents(new CSSprint(), this))
                 .exceptionallyAsync(e -> {
                     logging.error("Error while registering sprint event!");
                     disablePlugin(e);
@@ -199,7 +195,7 @@ public final class Main extends JavaPlugin {
                     }
                 })
                 .exceptionallyAsync(e -> {
-                    logging.error("Error while serializing muted player list!");
+                    logging.error("Error while serializing message muter list!");
                     logging.error(e);
                     return null;
                 });
