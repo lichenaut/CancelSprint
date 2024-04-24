@@ -45,9 +45,9 @@ public class CSSQLiteManager {
         try (Connection connection = dataSource.getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery("SELECT * FROM muters")) {
-                    while (resultSet.next()) {
-                        Main.muters.add(UUID.fromString(resultSet.getString("uuid")));
-                    }
+                    while (resultSet.next()) Main.muters.add(UUID.fromString(resultSet.getString("uuid")));
+                } finally {
+                    statement.execute("DELETE FROM muters");
                 }
             }
         }
