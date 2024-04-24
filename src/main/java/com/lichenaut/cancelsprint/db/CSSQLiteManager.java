@@ -17,7 +17,7 @@ public class CSSQLiteManager {
         dataSource.setDataSourceClassName("org.sqlite.SQLiteDataSource");
         String separator = Main.separator;
         dataSource.addDataSourceProperty("url", "jdbc:sqlite:plugins" + separator + "CancelSprint" + separator + "muters.db");
-        dataSource.setMaximumPoolSize(3);
+        dataSource.setMaximumPoolSize(2);
     }
 
     public void closeDataSource() {

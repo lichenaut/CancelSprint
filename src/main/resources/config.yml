@@ -2,6 +2,7 @@
 disable-plugin: false
 
 #In ticks, the interval the plugin will check for sprinting.
+  #Minimum value: 1
 ticks-per-check: 60
 
 #Locale for CancelSprint messages.

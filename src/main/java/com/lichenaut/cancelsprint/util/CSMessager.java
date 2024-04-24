@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.ComponentStyle;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -158,61 +157,13 @@ public class CSMessager {
         infoLog(message);
     }
 
-    public void spreadMsg(boolean broadcast, BaseComponent[] message, boolean includePrefix) {
-        if (broadcast) {
-            if (prefix == null || !includePrefix) {
-                main.getServer().spigot().broadcast(message);
-            } else {
-                main.getServer().spigot().broadcast(concatArrays(prefix, message));
-            }
-        }
-
-        infoLog(message);
-    }
-
-    private void infoLog(BaseComponent[] message) {
-        main.getLogging().info(new TextComponent(message).toLegacyText().replaceAll("§[0-9a-fA-FklmnoKLMNO]", ""));
-    }
-
     public BaseComponent[] concatArrays(BaseComponent[]... arrays) {
         ArrayList<BaseComponent> resultList = new ArrayList<>();
         for (BaseComponent[] array : arrays) resultList.addAll(Arrays.asList(array));
         return resultList.toArray(new BaseComponent[0]);
     }
 
-    public BaseComponent[] combineMessage(BaseComponent[] msgComponent, String msgString) {
-        if (msgString == null || msgString.isEmpty()) return msgComponent;
-
-        BaseComponent[] textComponent = new BaseComponent[]{TextComponent.fromLegacy(msgString)};
-
-        ComponentBuilder builder = new ComponentBuilder("");
-        ArrayList<Object> lastFormat = continueFormat(msgComponent);
-        builder.color((ChatColor) lastFormat.get(0));
-        Object lastStyle = lastFormat.get(1);
-        if (lastStyle != null) builder.style((ComponentStyle) lastStyle);
-        for (BaseComponent component : textComponent) builder.append(component);
-        textComponent = builder.create();
-
-        int msgLength = msgComponent.length;
-        int textLength = textComponent.length;
-        BaseComponent[] combined = new BaseComponent[msgLength + textLength];
-        System.arraycopy(msgComponent, 0, combined, 0, msgLength);
-        System.arraycopy(textComponent, 0, combined, msgLength, textLength);
-        return combined;
-    }
-
-    private static ArrayList<Object> continueFormat(BaseComponent[] components) {
-        ArrayList<Object> format = new ArrayList<>();
-        format.add(ChatColor.WHITE);
-        format.add(null);
-        for (int i = components.length - 1; i >= 0; i--) {
-            BaseComponent component = components[i];
-            if (component.getColor() != null) {
-                format.set(0, component.getColor());
-                if (component.getStyle() != null) format.set(1, component.getStyle());
-                break;
-            }
-        }
-        return format;
+    private void infoLog(BaseComponent[] message) {
+        main.getLogging().info(new TextComponent(message).toLegacyText().replaceAll("§[0-9a-fA-FklmnoKLMNO]", ""));
     }
 }

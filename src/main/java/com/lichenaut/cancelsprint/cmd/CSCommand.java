@@ -9,9 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
-import javax.annotation.processing.Messager;
-import java.util.HashSet;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @RequiredArgsConstructor
@@ -66,7 +63,6 @@ public class CSCommand implements CommandExecutor {
                 return true;
             }
         }
-
         return true;
     }
 

@@ -168,6 +168,7 @@ public final class Main extends JavaPlugin {
                 });
 
         checkInterval = configuration.getLong("ticks-per-check");
+        if (checkInterval < 1) checkInterval = 1;
         mainFuture = mainFuture
                 .thenAcceptAsync(registered -> {
                     teleportManager.addRunnable(new CSTeleporter(this), checkInterval);
